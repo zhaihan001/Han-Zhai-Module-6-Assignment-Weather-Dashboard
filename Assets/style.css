@@ -1,0 +1,47 @@
+:root{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-image: linear-gradient(to right, rgb(83, 100, 232),indigo);
+    color: white;
+    text-align:center;
+    padding:20px;
+    block-size: 200%;
+}
+
+.card{
+    margin: 10px 0;
+}
+
+.border{
+    margin: 10px 0;
+}
+
+#searchbtn {
+    width: 100%;
+    background-color: blue;
+    color:whitesmoke;
+    margin: 10px 0;
+    border-radius: .3em;
+    font-size: larger;
+}
+
+#searchbtn:hover{
+    font-size: 25px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.btn {
+    width: 100%;
+    background-color: lightgrey;
+    margin: 10px 0;
+    border-radius: .3em;
+}
+
+.btn:hover {
+    font-size: 25px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
