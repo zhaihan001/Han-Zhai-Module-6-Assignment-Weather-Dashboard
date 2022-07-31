@@ -10,17 +10,30 @@ header {
     block-size: 200%;
 }
 
+h2{
+    font-weight: bold;
+}
+
 .card{
     margin: 10px 0;
 }
 
 .border{
-    margin: 10px 0;
+    margin: 10px;
+    padding-left: 0.5em;
+}
+
+ul{
+    list-style: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    line-height: 40px;
 }
 
 #searchbtn {
     width: 100%;
-    background-color: blue;
+    background-color: rgb(83, 83, 175);
     color:whitesmoke;
     margin: 10px 0;
     border-radius: .3em;
@@ -28,6 +41,7 @@ header {
 }
 
 #searchbtn:hover{
+    background-color: blue;
     font-size: 25px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -41,6 +55,7 @@ header {
 }
 
 .btn:hover {
+    background-color: darkgray;
     font-size: 25px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
