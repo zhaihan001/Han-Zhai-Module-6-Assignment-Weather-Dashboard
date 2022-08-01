@@ -4,6 +4,9 @@
 
 https://zhaihan001.github.io/Han-Zhai-Module-6-Assignment-Weather-Dashboard/
 
+## Screenshot
+<img width="762" alt="Capture" src="https://user-images.githubusercontent.com/106831265/182080123-3dcbf1fc-e0f0-473d-be87-4aa38920e98c.PNG">
+
 ## User Story
 
 ```
@@ -28,5 +31,5 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
-## Mock-Up
-(./Assets/06-server-side-apis-homework-demo.png)
+
+
