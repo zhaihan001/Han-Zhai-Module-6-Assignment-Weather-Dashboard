@@ -14,14 +14,10 @@ var futureDays = document.querySelectorAll(".card-title");
 var futureImg = document.querySelectorAll(".card-img-top");
 var futureText = document.querySelectorAll(".card-text");
 
-
-
-
-var cityViewed;
 var searchButton = document.getElementById("searchbtn");
-var historyButton = document.getElementById("btn");
+var historyButton = document.getElementsByClassName("btn");
 
-function clear(){
+function clear() {
     ulEl.textContent = " ";
     for (let i = 0; i < 5; i++) {
         futureDays[i].textContent = moment().add(i + 1, "days").format("l");
@@ -30,14 +26,12 @@ function clear(){
     }
 }
 
-
 // Get current weather
-
 function search(event) {
     event.preventDefault(event);
     clear();
     // keep right side screen clear on load
-    if (document.querySelector(".hide")!=null){
+    if (document.querySelector(".hide") != null) {
         document.querySelector(".hide").classList.remove("hide");
     }
     // convert city name to coordinates
@@ -57,7 +51,7 @@ function search(event) {
                 })
                 // display current day weather
                 .then(function (data2) {
-
+                    clear();
                     var temp = document.createElement("li");
                     var wind = document.createElement("li");
                     var humidity = document.createElement("li");
@@ -73,14 +67,14 @@ function search(event) {
                     uvi.textContent = "UI Index: " + data2.current.uvi;
 
                     //add background color of UV Index to show favorable, moderate, or severe
-                    if(data2.current.uvi<=2){
-                        uvi.style.backgroundColor="lightgreen";
+                    if (data2.current.uvi <= 2) {
+                        uvi.style.backgroundColor = "lightgreen";
                     }
-                    else if (data2.current.uvi<6){
-                        uvi.style.backgroundColor="yellow";
+                    else if (data2.current.uvi < 6) {
+                        uvi.style.backgroundColor = "yellow";
                     }
-                    else{
-                        uvi.style.backgroundColor="red";
+                    else {
+                        uvi.style.backgroundColor = "red";
                     }
 
                     // add all info to the list
@@ -111,51 +105,88 @@ function search(event) {
                         futureText[i].append(futurewind);
                         futureText[i].append(futurehumidity);
                     }
-
+                    history();
                 })
         })
+}
+
+// Make history buttons work
+function history(){
+    for (let j = 0; j < historyButton.length; j++) {
+        historyButton[j].addEventListener("click", function () {
+            searchCity.value = historyButton[j].textContent;
+            console.log(searchCity.value);
+            clear();
+            // convert city name to coordinates
+            fetch(coordinateUrl + searchCity.value + apiKey)
+                .then(function (response1) {
+                    return response1.json();
+                })
+                .then(function (data1) {
+                    lat = data1[0].lat;
+                    lon = data1[0].lon;
+        
+                    var currentUrl = currentWeatherUrl + "lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely,alerts" + unitParameter + apiKey;
+                    //weather search using coordinates
+                    fetch(currentUrl)
+                        .then(function (response2) {
+                            return response2.json();
+                        })
+                        // display current day weather
+                        .then(function (data2) {
+                            clear();
+                            temp = document.createElement("li");
+                            wind = document.createElement("li");
+                            humidity = document.createElement("li");
+                            uvi = document.createElement("li");
+                            icon = document.createElement("IMG");
+                            icon.src = "http://openweathermap.org/img/wn/" + data2.current.weather[0].icon + "@2x.png";
+        
+                            h2El.textContent = data1[0].name + " ( " + currentDateTime + " ) ";
+                            temp.textContent = "Temp: " + data2.current.temp + " °F";
+                            wind.textContent = "Wind: " + data2.current.wind_speed + " MPH";
+                            humidity.textContent = "Humidity: " + data2.current.humidity + " %";
+                            uvi.textContent = "UI Index: " + data2.current.uvi;
+        
+                            //add background color of UV Index to show favorable, moderate, or severe
+                            if (data2.current.uvi <= 2) {
+                                uvi.style.backgroundColor = "lightgreen";
+                            }
+                            else if (data2.current.uvi < 6) {
+                                uvi.style.backgroundColor = "yellow";
+                            }
+                            else {
+                                uvi.style.backgroundColor = "red";
+                            }
+        
+                            // add all info to the list
+                            h2El.append(icon);
+                            ulEl.append(temp);
+                            ulEl.append(wind);
+                            ulEl.append(humidity);
+                            ulEl.append(uvi);
+        
+                            // add future 5 days forecast
+                            for (let i = 0; i < 5; i++) {
+                                //add image
+                                futureImg[i].src = "http://openweathermap.org/img/wn/" + data2.daily[i].weather[0].icon + "@2x.png";
+                                // add temp, wind and humidity info
+                                futuretemp = document.createElement("li");
+                                futurewind = document.createElement("li");
+                                futurehumidity = document.createElement("li");
+                                futuretemp.textContent = "Temp: " + data2.daily[i].temp.day + " °F";
+                                futurewind.textContent = "Wind: " + data2.daily[i].wind_speed + " MPH";
+                                futurehumidity.textContent = "Humidity: " + data2.daily[i].humidity + " %";
+                                futureText[i].append(futuretemp);
+                                futureText[i].append(futurewind);
+                                futureText[i].append(futurehumidity);
+                            }
+                        })
+                })
+        });
+    }
+
 
 }
 
-
-
-// function history(event) {
-//     event.preventDefault();
-//     ulEl.textContent = " ";
-//     var currentUrl = currentWeatherUrl + history.textContent + unitParameter + apiKey;
-
-//     fetch(currentUrl)
-//         .then(function (response) {
-//                 return response.json();
-//         })
-//         .then(function (data) {
-
-//             console.log(data);
-//             var temp = document.createElement("li");
-//             var wind = document.createElement("li");
-//             var humidity = document.createElement("li");
-//             var icon = document.createElement("IMG");
-//             icon.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
-
-
-//             h2El.textContent = data.name + " ( " + currentDateTime + " ) ";
-//             temp.textContent = "Temp: " + data.main.temp + " °F";
-//             wind.textContent = "Wind: " + data.wind.speed + " MPH";
-//             humidity.textContent = "Humidity: " + data.main.humidity + " %";
-
-//             h2El.append(icon);
-//             ulEl.append(temp);
-//             ulEl.append(wind);
-//             ulEl.append(humidity);
-//         })
-// }
-
-// Use History button
-
-
-
-
-
-
 searchButton.addEventListener("click", search);
-// historyButton.addEventListener("click", history);
