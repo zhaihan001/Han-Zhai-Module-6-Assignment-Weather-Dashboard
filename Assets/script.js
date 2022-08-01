@@ -57,7 +57,7 @@ function search(event) {
                     var humidity = document.createElement("li");
                     var uvi = document.createElement("li");
                     var icon = document.createElement("IMG");
-                    icon.src = "http://openweathermap.org/img/wn/" + data2.current.weather[0].icon + "@2x.png";
+                    icon.src = "https://openweathermap.org/img/wn/" + data2.current.weather[0].icon + "@2x.png";
 
 
                     h2El.textContent = data1[0].name + " ( " + currentDateTime + " ) ";
@@ -93,7 +93,7 @@ function search(event) {
                     // add future 5 days forecast
                     for (let i = 0; i < 5; i++) {
                         //add image
-                        futureImg[i].src = "http://openweathermap.org/img/wn/" + data2.daily[i].weather[0].icon + "@2x.png";
+                        futureImg[i].src = "https://openweathermap.org/img/wn/" + data2.daily[i].weather[0].icon + "@2x.png";
                         // add temp, wind and humidity info
                         var futuretemp = document.createElement("li");
                         var futurewind = document.createElement("li");
@@ -140,7 +140,7 @@ function history(){
                             humidity = document.createElement("li");
                             uvi = document.createElement("li");
                             icon = document.createElement("IMG");
-                            icon.src = "http://openweathermap.org/img/wn/" + data2.current.weather[0].icon + "@2x.png";
+                            icon.src = "https://openweathermap.org/img/wn/" + data2.current.weather[0].icon + "@2x.png";
         
                             h2El.textContent = data1[0].name + " ( " + currentDateTime + " ) ";
                             temp.textContent = "Temp: " + data2.current.temp + " °F";
@@ -169,7 +169,7 @@ function history(){
                             // add future 5 days forecast
                             for (let i = 0; i < 5; i++) {
                                 //add image
-                                futureImg[i].src = "http://openweathermap.org/img/wn/" + data2.daily[i].weather[0].icon + "@2x.png";
+                                futureImg[i].src = "https://openweathermap.org/img/wn/" + data2.daily[i].weather[0].icon + "@2x.png";
                                 // add temp, wind and humidity info
                                 futuretemp = document.createElement("li");
                                 futurewind = document.createElement("li");
